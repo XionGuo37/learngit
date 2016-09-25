@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>时钟</title>
+<style type="text/css">
+#miaoZhen{
+	width:100px;
+	height:3px;
+	background-color:#000;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:4;
+	margin:0 0 0 -10px;
+	transform:rotate(0deg);
+	transform-origin:10px 50%;   /* 设置旋转基点*/
+}
+#fenZhen{
+	width:90px;
+	height:6px;
+	background-color:#333;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:3;
+	transform:rotate(0deg);
+	transform-origin:0 50%;   /* 设置旋转基点,等于0 50%=left*/
+}
+#shiZhen{
+	width:65px;
+	height:6px;
+	background-color:#666;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:2;
+	transform:rotate(0deg);
+	transform-origin:0 50%;
+}
+#bgi{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	margin: -100px 0 0 -100px;
+}
+	
+
+</style>
+<script type="text/javascript">
+function clock()
+{
+	//秒针处理
+	var mz=document.getElementById("miaoZhen");	
+	var time=new Date();	
+	var a=6*time.getSeconds()-90; //一圈360度、60秒，所以1秒转6度；因为transform的rotate默认0度是右水平的，如果要像时钟0秒是90度的话就要-90
+	mz.style.transform="rotate("+a+"deg)";
+	
+	//分针处理
+	var fz=document.getElementById("fenZhen");
+	var b=6*time.getMinutes()-90;
+	fz.style.transform="rotate("+b+"deg)";
+	
+	//时针处理
+	var sz=document.getElementById("shiZhen");
+	var c=30*time.getHours()-90;
+	sz.style.transform="rotate("+c+"deg)";
+	
+	setTimeout("clock()",1000);
+}
+
+window.onload=clock;
+//</script>
+</head>
+
+<body>
+<div id="miaoZhen"></div>
+<div id="fenZhen"></div>
+<div id="shiZhen"></div>
+<div id="bgi"><img src="images/手表背景.jpg" width="200" height="200" /></div>
+</body>
+</html>
