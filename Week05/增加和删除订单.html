@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>增加和删除订单</title>
+<style>
+#div1{
+	width:700px;
+	margin-left:auto;
+	margin-right:auto;
+}
+table{
+	text-align:center;
+}
+.bgc{
+	background:#999;
+}
+</style>
+<script>
+//增加订单
+
+	function addRow()
+	{
+		var tb=document.getElementById('tb');
+		var add=document.getElementById('add');
+		var row_index=tb.rows.length-1;
+		var newRow=tb.insertRow(row_index);
+		newRow.id="row"+row_index;
+		var col1=newRow.insertCell(0);
+		col1.innerHTML='抗疲劳神奇钛项圈';
+		var col2=newRow.insertCell(1);
+		col2.innerHTML=row_index;
+		var col3=newRow.insertCell(2);
+		col3.innerHTML='&yen;49.00';
+		var col4=newRow.insertCell(3);
+		col4.innerHTML="<input name='del"+row_index+"' type='button' value='删除' onclick=\"delRow('row"+row_index+ "')\" />";		
+	}
+	
+	
+	//删除处理
+	function delRow(rowId)
+	{
+		var row=document.getElementById(rowId).rowIndex;
+		document.getElementById("tb").deleteRow(row);
+	}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<table id="tb" width="700px" border="1" cellspacing="0">
+	<tr class="bgc">
+    	<td>商品名称</td>
+        <td>数量</td>
+        <td>价格</td>
+        <td>操作</td>
+    </tr>
+    <tr id="del1">
+    	<td>防滑真皮休闲鞋</td>
+        <td>12</td>
+        <td>&yen;568.50</td>
+        <td><input name="rowdel" type="button" value="删除" onclick='delRow("del1")'/></td>
+    </tr>
+    <tr>
+    	<td colspan="4"><input id="add" type="button" value="增加订单" onclick="addRow()"/></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

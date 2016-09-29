@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>操作表单</title>
+<style>
+#div1{
+	margin-left:auto;
+	margin-right:auto;
+	width:500px;
+}
+
+.title{
+	text-align:center;
+	background-color:#cccccc;
+}
+
+.center{
+	text-align:center;
+}
+</style>
+<script>
+window.onload=function ()
+{
+	var btn1=document.getElementById('btn1');
+	var btn2=document.getElementById('btn2');
+	var btn3=document.getElementById('btn3');
+	var btn4=document.getElementById('btn4');
+	
+	//增加一行实现
+	btn1.onclick=function ()
+	{
+		var fRow=document.getElementById('row3');    //获取要插入的标记
+		var newRow=document.createElement('tr');    ///创建一个行节点
+		var col1=document.createElement('td');    //创建一个列节点
+		col1.innerHTML='幸福从天而降';
+		var col2=document.createElement('td');    //创建另一个列节点
+		col2.innerHTML='&yen;18.50';                
+		col2.setAttribute('align','center');    //设置样式
+		newRow.appendChild(col1);                     //向行节点插入列节点
+		newRow.appendChild(col2);
+		document.getElementById('row3').parentNode.insertBefore(newRow,fRow);
+	};
+	
+	//删除行操作
+	btn2.onclick=function ()
+	{
+		 var dRow=document.getElementById('row2');
+		 dRow.parentNode.removeChild(dRow);
+	}
+	
+	//设置标题
+	btn3.onclick=function ()
+	{
+		var row1=document.getElementById('row1');
+		row1.className='title';
+	};
+	
+	//复制最后一行
+	btn4.onclick=function ()
+	{
+		var oldRow=document.getElementById('row3');
+		var newRow=oldRow.cloneNode(true);
+		document.getElementById('myTable').appendChild(newRow);
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <table id="myTable" width="500px" border="1" cellspacing="0">
+        <tr id="row1">
+            <td>书名</td>
+            <td>价格</td>
+        </tr>
+        <tr id="row2">
+            <td>看得见风景的房间</td>
+            <td class="center">&yen;30.00</td>
+        </tr>
+        <tr id="row3">
+            <td>60个瞬间</td>
+            <td class="center">&yen;32.00</td>
+        </tr>
+    </table>
+    <input id="btn1" type="button" value="增加一行"/>
+    <input id="btn2" type="button" value="删除第二行"/>
+    <input id="btn3" type="button" value="修改标题样式"/>
+    <input id="btn4" type="button" value="复制最后一行"/>
+</div>
+</body>
+</html>
