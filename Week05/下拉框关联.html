@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下拉框关联</title>
+<style>
+select{
+	width:60px;
+}
+</style>
+<script>
+var city=[
+			['广州市','深圳市','珠海市','汕头市','韶关市','佛山市','江门市','湛江市','茂名市','肇庆市','惠州市','梅州市','汕尾市','河源市','阳江市','清远市','东莞市','中山市','潮州市','揭阳市','云浮市'],
+			['海口市','文昌市','三亚市','五指山市','琼海市','儋州市','万宁市','东方市'],
+];
+function getCity()
+{
+	var pr=document.form1.province;
+	var ci=document.form1.city;
+	var pc=city[pr.selectedIndex - 1];  //获取对应省份的城市数组
+	ci.length=1;	
+	for(var i=0;i<pc.length;i++)
+	{
+		ci[i+1]=new Option(pc[i],pc[i]);
+	}	
+}
+</script>
+</head>
+
+<body>
+<form method=post action="" name="form1">  
+	请选择省份：
+	<select name="province" onchange="getCity()">
+        <option value="0"> </option>
+        <option value="广东省">广东省</option>
+        <option value="海南省">海南省</option>
+	</select>
+	城市：
+	<select name="city">
+		<option value="0"> </option>
+	</select>
+</form>
+</body>
+</html>
