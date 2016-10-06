@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{
+	width:300px;
+	height:320px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-160px 0 0 -150px;
+	z-index:1;
+	background:red;
+}
+#div2{
+	width:200px;
+	height:100px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-10px 0 0 -100px;
+	z-index:2;
+	background:#fff;
+	font-size:24px;
+	text-align:center;
+	line-height:100px;
+}	
+li{
+	list-style:none;
+	font-family:"微软雅黑";
+	font-size:60px;
+	color:#FFF;
+	margin-left:65px;
+	margin-top:40px;
+}
+canvas{
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-10px 0 0 -100px;
+	z-index:3;
+}
+</style>
+<script>
+window.onload=function ()
+{
+	//奖项随机
+	var oDiv=document.getElementById('div2');
+	var num=Math.floor(Math.random()*10+0);
+	if(num<=1)
+	{
+		oDiv.innerHTML='一等奖';
+	}
+	else if(num>1&&num<=3)
+	{
+		oDiv.innerHTML='二等奖';
+	}
+	else if(num>3&&num<=6)
+	{
+		oDiv.innerHTML='三等奖';
+	}
+	else
+	{
+		oDiv.innerHTML='谢谢参与';
+	}
+	
+	
+	var canvas=document.getElementById('cv');
+	var context=canvas.getContext("2d");
+	context.fillStyle = "#999";
+	
+	//context.globalCompositeOperation = "destination-over"; //与destination-out实现擦除效果  
+	context.beginPath();  
+	context.fillRect(0,0,201,101);  
+	context.closePath(); 
+	
+	//鼠标按下执行鼠标在元素内部移动函数(左右键都能运行)
+	canvas.onmousedown=function()
+	{
+		canvas.onmousemove = function(e)  
+		{  
+			//获取鼠标位置  IE不兼容  
+			var x = e.pageX - canvas.offsetLeft;  
+			var y = e.pageY - canvas.offsetTop;
+				  
+			context.globalCompositeOperation = "destination-out";  
+			context.beginPath();  //关闭画的时候会卡卡的 画出来会断断续续
+			context.arc(x,y,10,0,2*Math.PI,true);  //绘制圆
+			context.fill();  //填充
+			context.closePath();  
+		} 
+	}
+	
+	//鼠标松开是执行停止鼠标在元素内部移动函数
+	canvas.onmouseup=function ()
+	{
+		 canvas.onmousemove = null;		 
+	}
+}
+</script>
+ 
+</head>
+<body>
+<div id="div1">
+	<li>刮刮乐</li>
+</div>
+<div id="div2">
+	谢谢参与
+</div>
+<canvas id="cv"></canvas>
+
+</body>
+</html>
