@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{
+	width:178px;
+	height:0px;
+	overflow:hidden;
+}
+#div2{
+	width:178px;
+	text-align:center;
+}
+img{
+	width:178px;
+	height:108px;
+	filter:alpha(opacity:0);
+	opacity:0;
+}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oImg=document.getElementById('img');
+	var oBtn1=document.getElementById('btn1');
+	var oBtn2=document.getElementById('btn2');
+	var alpha=0;
+	var timer=null;
+	
+	oBtn1.onclick=function ()
+	{
+		starMove(108);
+	};
+	
+	oBtn2.onclick=function ()
+	{
+		starMove(0);
+	};
+	
+	function starMove(iTarget)
+	{			
+		clearInterval(timer);
+		timer=setInterval(function (){
+			var speed=0;
+			var alphaSpeed=0;
+			if(alpha<iTarget)
+			{
+				speed=4;
+				alphaSpeed=4;
+			}
+			else
+			{
+				speed=-4;
+				alphaSpeed=-4;
+			}
+			if(alpha==iTarget)
+			{
+				clearInterval(timer);
+				//alert(alpha);  //测试用
+			}
+			else
+			{
+				oDiv.style.height=oDiv.offsetHeight+speed+'px';
+				//oImg.style.height=oDiv.offsetHeight+speed+'px';  //IE不兼容background-image 改！
+				alpha+=alphaSpeed;
+				oImg.style.filter='alpha(opacity:'+alpha+')'; //IE
+				oImg.style.opacity=alpha/100;
+			}
+		},30);
+	};
+	
+	
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<img src="images/2.jpg" id="img"/>
+</div>
+<div id="div2">
+	<input type="button" value="淡入" id="btn1" />
+    <input type="button" value="淡出" id="btn2" />
+</div>
+</body>
+</html>
