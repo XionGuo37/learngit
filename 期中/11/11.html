@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	document.write("<h3>第一题</h3>");	
+	for(var i=0;i<5;i++)
+	{
+		
+		for(var j=0;j<5;j++)
+		{
+			if(i==j)
+			{
+				document.write("<span style='color:red'>&yen; </span>");	
+			}
+			else
+			{
+				document.write("<span>&yen; </span>");
+			}
+		}
+		document.write("<br>");
+	}
+	
+	//图2
+	document.write("<h3>第二题</h3>");	
+	var row=Math.ceil(prompt("请输入行数：","")/2);
+	var j,h;
+	document.write("<div style='width:40px;'>");
+	document.write("<center>");
+	for(j=row;j>1;j--)
+	{
+		for(h=2*j-1;h>0;h--)
+		{
+			document.write("*");
+		}
+		
+		document.write("<br />");
+	}
+	for(j=1;j<=row;j++)
+	{
+		for(h=0;h<2*j-1;h++)
+		{
+			document.write("*");
+		}
+		document.write("<br />");
+	}
+	document.write("</center>");
+	document.write("</div>");	
+	
+	//图3
+	document.write("<h3>第三题</h3>");
+	document.write("<div style='width:40px;'>");
+	document.write("<center>");
+	for(h = 0;h<2*row-1;h++)
+	{
+		for(j = 0;j<2*row-1;j++)
+		{
+			document.write(p(h,j,row-1));
+		}
+		document.write("<br/>");
+	}
+	
+	function  p(x,y,row){
+		if(x>row){x=2*row-x;}
+		if(y>row){y= 2*row-y;}
+		if(x+y==row)
+		{
+			return("<span style='color:#f00;'>&copy;<span>");
+		}
+		return("<span style='color:transparent;'>.<span>");
+	}
+	document.write("</center>");
+	document.write("</div>");			
+};
+</script>
+
+</head>
+
+<body>
+<input type="text" id="txt" />
+<input type="button" value="打印" id="btn"/>
+</body>
+</html>

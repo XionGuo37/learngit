@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#box{
+	width:666px;
+	height:500px;
+	background-image:url(../images/14/bg.jpg);
+	margin:0 auto;   
+}
+#main{
+	width:300px;
+	height:150px;
+	margin:0 auto;
+	text-align:center;   
+}
+#img{
+	width:250px;
+	height:234px;
+	margin:0 auto;
+}
+select{
+	width:150px;
+}
+</style>
+<script>
+window.onload=function ()
+{
+	var role=[
+				['人类','暗夜精灵','矮人','侏儒'],
+				['兽人','牛头人','亡灵','巨魔'],
+	];
+	var oSel1=document.form1.sel1;
+	var oSel2=document.form1.sel2;
+	oSel1.onchange=function getRole()
+	{
+		
+		var pc=role[oSel1.selectedIndex - 1];  //获取对应省份的城市数组
+		oSel2.length=1;	
+		for(var i=0;i<pc.length;i++)
+		{
+			oSel2[i]=new Option(pc[i],pc[i]);
+		}
+		showPic(1);	
+	};
+}
+
+function showPic(num)
+{
+	var type=document.form1.sel1.value;
+	var oImg=document.getElementById('img').getElementsByTagName('img')[0];
+	var oSel2=document.form1.sel2;
+	oImg.src='../images/14/2.jpg';
+	
+	if(type==1)
+	{
+		for(var i=1;i<5;i++)
+		{
+			if(num==i)
+			{
+				oImg.src='../images/14/'+i+'.jpg';
+			}
+		}
+	}
+	else if(type==2)
+	{
+		for(var i=1;i<5;i++)
+		{
+			if(num==i)
+			{
+				oImg.src='../images/14/'+(i+4)+'.jpg';
+			}
+		}
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div id="main">
+    	<form method=post action="" name="form1">    	
+            <br><h3>魔兽世界八大种族(图)</h3>
+            阵营选择：
+            <select id="sel1">
+                <option value="0">请选择你的阵营</option>
+                <option value="1">联盟</option>
+                <option value="2">部落</option>
+            </select><br>
+            角色选择：
+            <select id="sel2" onchange="showPic(this.selectedIndex+1)">
+                <option value="">请选择一个种族</option>
+            </select>
+		</form>
+    </div>
+    <div id="img">
+    	<img src="../images/14/1.jpg" />
+    </div>
+</div>
+</body>
+</html>
